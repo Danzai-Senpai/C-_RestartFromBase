@@ -1,8 +1,11 @@
 #include<iostream>
-using namespace std;
 
 int main()
 {
-    cout << "Hello World!!!!!";
+    std::cout << "\n";
+    std::cout << "Hello World!!!!! \n";
+    std::cout << "I'm studying C++ to improve my basics skills" << "\n\n";
+    std::cout << "I think that's the way.";
+    std::cout << "\n\n";
     return 0;
 }
