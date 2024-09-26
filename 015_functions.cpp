@@ -6,7 +6,13 @@ int myReturn(int x, int y);
 void myFunction(int &x, int &y);
 void myFunction(int myNumbers[5]);
 
+//Global Variable
+string global;
+
 int main() {
+
+    //Local Variable
+    string local;
     
     cout << "\n";
 
