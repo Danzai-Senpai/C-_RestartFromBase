@@ -1,84 +1,145 @@
 #include<iostream>
 #include<vector>
 #include<list>
-#include<set>
-#include<map>
 #include<stack>
 #include<queue>
 
-using namespace std;
+class AllTests {
+    public:
+
+        void vectorTest() {
+            std::cout << "\n\n";
+            std::cout << "Vectors Test Below ------>\n\n";
+            
+            std::vector<std::string> cars = {"Volvo", "BMW", "Ford", "Mazda"};
+            
+            for (std::string car : cars) {
+                std::cout << car << "\n";
+            }
+            
+            std::cout << "\n";
+            std::cout << "Index 1: " << cars.at(1) << "\n"; 
+            std::cout << "Index 2: " << cars[2] << "\n\n";
+            
+            std::cout << "First Element: " << cars.front() << "\n";
+            std::cout << "Last Element: " << cars.back() << "\n\n";
+            
+            cars.at(1) = "Tesla";
+            std::cout << "Index 1 after Change: " << cars.at(1) << "\n\n";
+            
+            cars.push_back("Opel"); 
+            std::cout << "Last Element after Add Element: " << cars.back() << "\n\n";
+            
+            cars.pop_back();
+            std::cout << "Last Element after Remove the Last Element: " << cars.back() << "\n\n";
+            
+            std::cout << "Size of Vector Now: " << cars.size() << "\n\n";
+            
+            std::cout << cars.empty() << "\n\n";
+            
+            for (std::string car : cars) {
+                std::cout << car << "\n";
+            }
+        }
+
+        void listTest() {
+            
+            std::cout << "\n\n";
+            std::cout << "List Test Below ------>\n\n";
+            
+            std::list<std::string> cars = {"Volvo", "BMW", "Ford", "Mazda"};
+            
+            for (std::string car : cars) {
+                std::cout << car << "\n";
+            }
+            
+            std::cout << "\n";
+            std::cout << cars.front() << "\n"; 
+            std::cout << cars.back() << "\n\n";
+            
+            cars.push_front("Tesla"); 
+            cars.push_back("Toyota"); 
+            
+            for (std::string car : cars) {
+                std::cout << car << "\n";
+            }
+            
+            std::cout << "\n";
+            
+            cars.pop_front(); 
+            cars.pop_back(); 
+            
+            for (std::string car : cars) {
+                std::cout << car << "\n";
+            }
+            
+            std::cout << "\n";
+            std::cout << "Size of the List Now: " << cars.size() << "\n\n";
+        }
+
+        void stackTest() {
+            
+            std::cout << "\n\n";
+            std::cout << "Stack Test Below ------>\n\n";
+            // Follow the order LIFO like a stack, if remove one element always will be the last that was be added.
+
+            std::stack<std::string> cars;
+
+            // Add elements to the stack (You cant add elements in the moment of declaration)
+            cars.push("Volvo");
+            cars.push("BMW");
+            cars.push("Ford");
+            cars.push("Mazda");
+
+            std::cout << "Show the Element in the Top of the Stack: " << cars.top() << "\n\n";
+
+            cars.top() = "Tesla"; // Change element in the top of stack
+
+            std::cout << "Size of the Stack: " << cars.size() << "\n";
+            std::cout << "Show the Element in the Top of the Stack after Change: " << cars.top() << "\n\n";
+
+            cars.pop(); // Remove the element in the top of stack. (LIFO)
+
+            std::cout << "Size of the Stack after Remove the Element: " << cars.size() << "\n";
+            std::cout << "Show the Element in the Top of the Stack after Remove the Top Element of the Stack: " << cars.top() << "\n\n";
+        }
+
+        void queueTest() {
+            std::cout << "\n\n";
+            std::cout << "Stack Test Below ------>\n\n";
+            // Follow the order FIFO like a stack, if remove one element always will be the last that was be added.
+
+            std::queue<std::string> cars;
+            
+            // Add elements to the stack (You cant add elements in the moment of declaration)
+            cars.push("Volvo");
+            cars.push("BMW");
+            cars.push("Ford");
+            cars.push("Mazda");
+
+            std::cout << "Size of the Queue: " << cars.size() << "\n";
+            std::cout << "Show the Element in the Front of the Queue: " << cars.front() << "\n";
+            std::cout << "Show the Element in the Back of the Queue: " << cars.back() << "\n\n";
+
+            cars.front() = "Tesla"; // Change element in the front of queue
+            cars.back() = "VW"; // Change element in the back of queue
+
+            std::cout << "Show the Element in the Front of the Queue After Change: " << cars.front() << "\n\n";
+            std::cout << "Show the Element in the Back of the Queue After Change: " << cars.back() << "\n\n";
+
+            cars.pop(); // Remove the element in the front of queue. (FIFO)
+
+            std::cout << "Size of the Queue After Remove One Element: " << cars.size() << "\n";
+            std::cout << "Show the Element in the Front of the Queue After Remove the Element: " << cars.front() << "\n\n";
+        }
+
+};
 
 int main() {
-    /*
-    cout << "\n\n";
-    cout << "Vectors Test Below ------>\n\n";
-    // Dinamic size and can have elements of the same type. Can access random elements by indice but can add and remove only the last element of the vector.
-    
-    vector<string> cars = {"Volvo", "BMW", "Ford", "Mazda"};
+    AllTests test1;
 
-    for (string car : cars) {
-        cout << car << "\n";
-    }
-
-    // Ways to access by Index in vectors
-    cout << "\n";
-    cout << "Index 1: " << cars.at(1) << "\n"; // Recommended Way
-    cout << "Index 2: " << cars[2] << "\n\n";
-
-    cout << "First Element: " << cars.front() << "\n"; // Get the first element
-    cout << "Last Element: " << cars.back() << "\n\n"; // Get the last element 
-
-    // Change the value of one element
-    cars.at(1) = "Tesla";
-    cout << "Index 1 after Change: " << cars.at(1) << "\n\n";
-
-    cars.push_back("Opel"); // Add element to the vector
-    cout << "Last Element after Add Element: " << cars.back() << "\n\n"; // Get the last element
-
-    cars.pop_back();
-    cout << "Last Element after Remove the Last Element: " << cars.back() << "\n\n"; // Get the last element
-
-    cout << "Size of Vector Now: " << cars.size() << "\n\n";
-
-    cout << cars.empty() << "\n\n"; // Check if the vector is empty, return 0 means no
-
-    for (string car : cars) {
-        cout << car << "\n";
-    }
-    */
-
-
-    cout << "\n\n";
-    cout << "List Test Below ------>\n\n";
-    // Dinamic size and can have elements of the same type. Can't access random elements by indice but can add and remove the first and the last element of the vector.
-
-    list<string> cars = {"Volvo", "BMW", "Ford", "Mazda"};
-
-    for (string car : cars) {
-        cout << car << "\n";
-    }
-
-    cout << "\n";
-    cout << cars.front() << "\n"; // Get the first element
-    cout << cars.back() << "\n\n"; // Get the last element
-
-    cars.push_front("Tesla"); // Add an element at the beginning
-    cars.push_back("Toyota"); // Add an element at the end
-
-    for (string car : cars) {
-        cout << car << "\n";
-    }
-
-    cout << "\n";
-    
-    cars.pop_front(); // Remove the first element
-    cars.pop_back(); // Remove the last element
-
-    for (string car : cars) {
-        cout << car << "\n";
-    }
-
-    cout << "\n";
-
-    cout << "Size of the List Now: " << cars.size() << "\n\n";
+    test1.vectorTest();
+    test1.listTest();
+    test1.stackTest();
+    test1.queueTest();
 }
