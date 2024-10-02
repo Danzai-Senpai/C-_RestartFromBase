@@ -64,5 +64,6 @@
         "xtree": "cpp",
         "xutility": "cpp"
     },
-    "code-runner.runInTerminal": true
+    "code-runner.runInTerminal": true,
+    "C_Cpp.errorSquiggles": "disabled"
 }
