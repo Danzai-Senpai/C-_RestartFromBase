@@ -18,7 +18,7 @@ bool binarySearch(int vector[TAM], int valueWanted, int *positionFound) {
     while (leftLimit <= rightLimit) {
         mid = (leftLimit+rightLimit)/2;
         if (vector[mid] == valueWanted) {
-            *positionFound == mid;
+            *positionFound = mid;
             valueWasFound = true;
             break;
         } else if (vector[mid] < valueWanted) {
@@ -27,7 +27,6 @@ bool binarySearch(int vector[TAM], int valueWanted, int *positionFound) {
             rightLimit = mid - 1;
         }
     }
-
     return valueWasFound;
 }
 
@@ -38,7 +37,7 @@ int main() {
     std::cout << "What of this numbers you want the position: ";
     std::cin >> valueWanted;
     if (binarySearch(vector, valueWanted, &positionFound) == true) {
-        std::cout << "Value found in position: " << &positionFound << std::endl;
+        std::cout << "Value found in position: " << positionFound << std::endl;
     } else {
         std::cout << "Value not found." << std::endl;
     }

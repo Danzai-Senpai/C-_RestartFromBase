@@ -3,7 +3,7 @@
 
 void printVector(int vector[TAM]) {
     for (int i = 0; i < TAM; i++) {
-        if (i < (TAM-1)) {
+        if (i < TAM - 1){
             std::cout << vector[i] << " - ";
         } else {
             std::cout << vector[i] << std::endl;
@@ -11,23 +11,15 @@ void printVector(int vector[TAM]) {
     }
 }
 
-bool binarySearch(int vector[TAM], int valueWanted, int *positionFound) {
-    int leftLimit = 0, rightLimit = TAM-1, mid;
+bool simpleSearch(int vector[TAM], int valueWanted, int *positionFound) {
     bool valueWasFound = false;
-
-    while (leftLimit <= rightLimit) {
-        mid = (leftLimit+rightLimit)/2;
-        if (vector[mid] == valueWanted) {
-            *positionFound == mid;
+    for (int i = 0; i < TAM; i++) {
+        if (vector[i] == valueWanted) {
             valueWasFound = true;
+            *positionFound = i;
             break;
-        } else if (vector[mid] < valueWanted) {
-            leftLimit = mid + 1;
-        } else {
-            rightLimit = mid - 1;
         }
     }
-
     return valueWasFound;
 }
 
@@ -37,8 +29,8 @@ int main() {
     printVector(vector);
     std::cout << "What of this numbers you want the position: ";
     std::cin >> valueWanted;
-    if (binarySearch(vector, valueWanted, &positionFound) == true) {
-        std::cout << "Value found in position: " << &positionFound << std::endl;
+    if (simpleSearch(vector, valueWanted, &positionFound) == true) {
+        std::cout << "Value found in position: " << positionFound << std::endl;
     } else {
         std::cout << "Value not found." << std::endl;
     }
