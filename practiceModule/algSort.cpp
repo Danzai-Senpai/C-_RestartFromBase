@@ -21,8 +21,9 @@ void bubbleSort(int vector[TAM]) {
                 vector[x] = vector[y];
                 vector[y] = aux;
             }
+            printVector(vector);
         }
-        printVector(vector);
+        
     }
 }
 
@@ -62,6 +63,41 @@ void selectionSort(int vector[TAM]) {
     }
 }
 
+void quickSort(int vector[TAM], int begin, int end) {
+    int pivot, left, right, mid, aux;
+    left = begin;
+    right = end;
+
+    mid = (int) ((left + right) / 2);
+    pivot = vector[mid];
+
+    std::cout<< std::endl << "Your Left Limit is the Number: " << vector[left] << std::endl;
+    std::cout << "Your Pivot is the Number: " << pivot << std::endl;
+    std::cout << "Your Right Limit is the Number: " << vector[right] << std::endl << std::endl;
+    while (right > left) {
+        while (vector[left] < pivot) {
+            left = left + 1;
+        }
+        while (pivot < vector[right]) {
+            right = right - 1;
+        }
+        if (left <= right) {
+            aux = vector[right];
+            vector[right] = vector[left];
+            vector[left] = aux;
+            left = left + 1;
+            right = right -1;
+        }
+        printVector(vector);
+    }
+    if (begin < right) {
+        quickSort(vector, begin, right);
+    }
+    if (left < end) {
+        quickSort(vector, left, end);
+    }
+}
+
 int main() {
 
     int testArr[TAM] = {7,8,9,4,5,6,1,2,3,0};
@@ -70,7 +106,10 @@ int main() {
     printVector(testArr);
     std::cout << "\n\n";
 
-    selectionSort(testArr);
+    //bubbleSort(testArr);
+    //insertionSort(testArr);
+    //selectionSort(testArr);
+    quickSort(testArr, 0, TAM - 1);
 
     std::cout << "\n\n";
     printVector(testArr);
