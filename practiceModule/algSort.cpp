@@ -64,6 +64,7 @@ void selectionSort(int vector[TAM]) {
 }
 
 void quickSort(int vector[TAM], int begin, int end) {
+
     int pivot, left, right, mid, aux;
     left = begin;
     right = end;
@@ -74,6 +75,7 @@ void quickSort(int vector[TAM], int begin, int end) {
     std::cout<< std::endl << "Your Left Limit is the Number: " << vector[left] << std::endl;
     std::cout << "Your Pivot is the Number: " << pivot << std::endl;
     std::cout << "Your Right Limit is the Number: " << vector[right] << std::endl << std::endl;
+
     while (right > left) {
         while (vector[left] < pivot) {
             left = left + 1;
@@ -90,11 +92,82 @@ void quickSort(int vector[TAM], int begin, int end) {
         }
         printVector(vector);
     }
+
     if (begin < right) {
         quickSort(vector, begin, right);
     }
+
     if (left < end) {
         quickSort(vector, left, end);
+    }
+}
+
+void shellSort(int vector[TAM]) {
+
+    int cardNow, gap = 1;
+
+    // Define Jumps to make for analyses.
+    while (gap < TAM) {
+        gap = 3 * gap + 1;
+    }
+
+    while (gap > 1) {
+        //Reduce distance between analyses
+        gap = gap / 3;
+    }
+
+    for (int i = gap; i < TAM; i++) {
+        cardNow = vector[i];
+        int j = i - gap;
+
+        while ((j >= 0) && (cardNow < vector[j])) {
+            vector[j + gap] = vector[j];
+            j = j - gap;
+        }
+        vector[j + gap] = cardNow;
+        printVector(vector);
+    }
+    
+}
+
+void merge(int vector[TAM], int iLeft, int mid, int iRight) {
+    int i, j, k;
+    int auxIndexLeft = mid - iLeft + 1;
+    int auxIndexRight = iRight - mid;
+
+    int vectorLeft[auxIndexLeft], vectorRight[auxIndexRight];
+
+    for (i = 0; i < auxIndexLeft; i++) {
+        vectorLeft[i] = vector[iLeft + i];
+    }
+
+    for (j = 0; j < auxIndexRight; j++) {
+        vectorRight[j] = vector[mid + j + 1];
+    }
+
+    i = 0;
+    j = 0;
+    k = auxIndexLeft;
+
+    while (i < auxIndexLeft && j < auxIndexRight) {
+        if (vectorLeft[i] <= vectorRight[j]) {
+            vector[k] = vectorLeft[i];
+            i++;
+        } else {
+            vector[k] = vectorRight[j];
+            j++;
+        }
+    }
+}
+
+void mergeSort(int vector[TAM], int iLeft, int iRight) {
+    if (iLeft < iRight) {
+
+        int mid = iLeft + (iRight + iLeft) / 2;
+        mergeSort(vector, iLeft, mid);
+        mergeSort(vector, mid, iRight);
+        merge(vector, iLeft, mid, iRight);
+
     }
 }
 
@@ -109,7 +182,9 @@ int main() {
     //bubbleSort(testArr);
     //insertionSort(testArr);
     //selectionSort(testArr);
-    quickSort(testArr, 0, TAM - 1);
+    //quickSort(testArr, 0, TAM - 1);
+    //shellSort(testArr);
+    mergeSort(testArr, 0, TAM - 1);
 
     std::cout << "\n\n";
     printVector(testArr);
