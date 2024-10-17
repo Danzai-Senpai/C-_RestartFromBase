@@ -1,1 +1,1 @@
-stackPush(stack, value*11, &top);
+sizeOfList
