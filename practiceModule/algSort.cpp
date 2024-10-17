@@ -131,23 +131,24 @@ void shellSort(int vector[TAM]) {
 }
 
 void merge(int vector[TAM], int iLeft, int mid, int iRight) {
+
     int i, j, k;
     int auxIndexLeft = mid - iLeft + 1;
     int auxIndexRight = iRight - mid;
-
+    
     int vectorLeft[auxIndexLeft], vectorRight[auxIndexRight];
-
+    
     for (i = 0; i < auxIndexLeft; i++) {
         vectorLeft[i] = vector[iLeft + i];
     }
-
+    
     for (j = 0; j < auxIndexRight; j++) {
-        vectorRight[j] = vector[mid + j + 1];
+        vectorRight[j] = vector[mid + 1 + j];
     }
-
+    
     i = 0;
     j = 0;
-    k = auxIndexLeft;
+    k = iLeft;
 
     while (i < auxIndexLeft && j < auxIndexRight) {
         if (vectorLeft[i] <= vectorRight[j]) {
@@ -157,18 +158,34 @@ void merge(int vector[TAM], int iLeft, int mid, int iRight) {
             vector[k] = vectorRight[j];
             j++;
         }
+        k++;
+    }
+
+    while (i < auxIndexLeft) {
+        vector[k] = vectorLeft[i];
+        i++;
+        k++;
+    }
+
+    while (j < auxIndexRight) {
+        vector[k] = vectorRight[j];
+        j++;
+        k++;
     }
 }
 
 void mergeSort(int vector[TAM], int iLeft, int iRight) {
+
     if (iLeft < iRight) {
 
-        int mid = iLeft + (iRight + iLeft) / 2;
+        int mid = iLeft + (iRight - iLeft) / 2;
         mergeSort(vector, iLeft, mid);
-        mergeSort(vector, mid, iRight);
+        mergeSort(vector, mid + 1, iRight);
+        printVector(vector);
         merge(vector, iLeft, mid, iRight);
 
     }
+
 }
 
 int main() {
