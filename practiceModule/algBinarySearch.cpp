@@ -12,21 +12,32 @@ void printVector(int vector[TAM]) {
 }
 
 bool binarySearch(int vector[TAM], int valueWanted, int *positionFound) {
+
     int leftLimit = 0, rightLimit = TAM-1, mid;
     bool valueWasFound = false;
 
     while (leftLimit <= rightLimit) {
+
         mid = (leftLimit+rightLimit)/2;
+
         if (vector[mid] == valueWanted) {
+
             *positionFound = mid;
             valueWasFound = true;
             break;
+
         } else if (vector[mid] < valueWanted) {
+
             leftLimit = mid + 1;
+
         } else {
+
             rightLimit = mid - 1;
+
         }
+
     }
+    
     return valueWasFound;
 }
 

@@ -50,7 +50,7 @@ void addToBeginSequential(People *&pointerSequential, int *sizeOfList, std::stri
 }
 
 void removeBeginSequential(People *&pointerSequential, int *sizeOfList) {
-    if (sizeOfList > 0) {
+    if (*sizeOfList > 0) {
         People* newListSequential = new People[*sizeOfList - 1];
         for (int i = 0; i < *sizeOfList - 1; i++) {
             newListSequential[i].name = pointerSequential[i+1].name;
@@ -64,6 +64,7 @@ void removeBeginSequential(People *&pointerSequential, int *sizeOfList) {
 }
 
 void addToEndSequential(People *&pointerSequential, int *sizeOfList, std::string name, int rg) {
+    
     if (*sizeOfList == 0) {
 
         People* newListSequential = new People[1];
@@ -93,6 +94,22 @@ void addToEndSequential(People *&pointerSequential, int *sizeOfList, std::string
 
 }
 
+void removeEndSequential(People *&pointerSequential, int *sizeOfList) {
+    if (*sizeOfList > 0) {
+
+        People* newListSequential = new People[*sizeOfList - 1];
+
+        for (int i = 0; i < *sizeOfList - 1; i++) {
+            newListSequential[i].name = pointerSequential[i].name;
+            newListSequential[i].rg = pointerSequential[i].rg;
+        }
+
+        pointerSequential = newListSequential;
+        *sizeOfList = *sizeOfList - 1;
+
+    }
+}
+
 void addToPositionSequential(People *&pointerSequential, int *sizeOfList, std::string name, int rg, int position) {
 
     position = position - 1;
@@ -118,6 +135,42 @@ void addToPositionSequential(People *&pointerSequential, int *sizeOfList, std::s
 
 }
 
+void removeFromPositionSequential(People *&pointerSequential, int *sizeOfList, int position) {
+    if (*sizeOfList > 1 && position <= *sizeOfList) {
+        
+        position = position - 1;
+        People* newListSequential = new People[*sizeOfList - 1];
+
+        for (int i = 0, j = 0; i < *sizeOfList; i++) {
+            if (i != position) {
+                newListSequential[j].name = pointerSequential[i].name;
+                newListSequential[j].rg = pointerSequential[i].rg;
+                j++;
+            }
+        }
+
+        delete[] pointerSequential;
+        pointerSequential = newListSequential;
+        *sizeOfList = *sizeOfList - 1;
+
+    } else if (*sizeOfList == 1) {
+
+        removeBeginSequential(pointerSequential, sizeOfList);
+
+    }
+
+}
+
+std::string returnNamebyRG(People *&pointerSequential, int *sizeOfList, int rg) {
+    std::string name = "Unvailable";
+    for (int i = 0; i < *sizeOfList; i++) {
+        if (pointerSequential[i].rg == rg) {
+            name = pointerSequential[i].name;
+        }
+    }
+    return name;
+}
+
 int main() {
 
     int functionChoosed = 1;
@@ -137,7 +190,7 @@ int main() {
 
     pointerSequential = exListSequential;*/
  
-    while (functionChoosed < 10) {
+    while (functionChoosed < 9 && functionChoosed > 0) {
 
         std::cout << std::endl;
         printSequential(pointerSequential, sizeOfList);
@@ -159,7 +212,7 @@ int main() {
 
         printSequential(pointerSequential, sizeOfList);
 
-        switch (functionChoosed) {
+        switch (functionChoosed < 9) {
             case 1:
                 std::cout << "\nFunction Choosed is: 1 - Insertion of a Node in the Begin of the List.\n\n";
                 std::cout << "Write a Name: ";
@@ -205,19 +258,36 @@ int main() {
             case 4:
                 removeBeginSequential(pointerSequential, &sizeOfList);
                 break;
+
             case 5:
+                removeEndSequential(pointerSequential, &sizeOfList);
                 break;
+
             case 6:
+                std::cout << "\nFunction Choosed is: 6 - Remove a Node in some Position of the List.\n\n";
+                std::cout << "You want to remove the element from which position: ";
+                std::cin >> position;
+                removeFromPositionSequential(pointerSequential, &sizeOfList, position);
                 break;
+
             case 7:
+                std::cout << "\nFunction Choosed is: 7 - Search for a node with the field RG.\n\n";
+                if (sizeOfList == 0) {
+                    std::cout << "\nEmpty List\n";
+                } else {
+                    std::cout << "Type a RG: ";
+                    std::cin >> rg;
+
+                    std::cout << "\nName of RG " << rg << ": " << returnNamebyRG(pointerSequential, &sizeOfList, rg) << std::endl;
+                }
                 break;
+
             case 8:
+                printSequential(pointerSequential, sizeOfList);
                 break;
-            case 9:
-                break;
+
         }
 
-        cleanScreen();
         
     }
 
