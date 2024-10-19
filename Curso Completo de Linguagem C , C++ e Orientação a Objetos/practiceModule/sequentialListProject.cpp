@@ -111,8 +111,6 @@ void removeEndSequential(People *&pointerSequential, int *sizeOfList) {
 }
 
 void addToPositionSequential(People *&pointerSequential, int *sizeOfList, std::string name, int rg, int position) {
-
-    position = position - 1;
     
     People* newListSequential = new People[*sizeOfList + 1];
     
@@ -190,7 +188,7 @@ int main() {
 
     pointerSequential = exListSequential;*/
  
-    while (functionChoosed < 9 && functionChoosed > 0) {
+    while (functionChoosed < 9) {
 
         std::cout << std::endl;
         printSequential(pointerSequential, sizeOfList);
@@ -212,7 +210,7 @@ int main() {
 
         printSequential(pointerSequential, sizeOfList);
 
-        switch (functionChoosed < 9) {
+        switch (functionChoosed) {
             case 1:
                 std::cout << "\nFunction Choosed is: 1 - Insertion of a Node in the Begin of the List.\n\n";
                 std::cout << "Write a Name: ";

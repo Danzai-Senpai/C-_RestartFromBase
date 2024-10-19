@@ -38,7 +38,7 @@ void printLinkedList(People *linkedListPeople) {
     }
 }
 
-void toBeginOfLinkedList(People *&linkedListPeople, std::string name, int rg) {
+void addToBeginOfLinkedList(People *&linkedListPeople, std::string name, int rg) {
 
     People* newPeople = new People;
     newPeople->name = name;
@@ -55,7 +55,21 @@ void toBeginOfLinkedList(People *&linkedListPeople, std::string name, int rg) {
 
 }
 
-void toEndOfLinkedList(People *&linkedListPeople, std::string name, int rg) {
+void removeToBeginOfLinkedList(People *&linkedListPeople) {
+
+    if (linkedListPeople->nextPeople == NULL) {
+        People* newList = new People;
+        newList->name = "";
+        newList->rg = 0;
+        newList->nextPeople = NULL;
+        linkedListPeople = newList;
+    } else {
+        linkedListPeople = linkedListPeople->nextPeople;
+    }
+
+}
+
+void addToEndOfLinkedList(People *&linkedListPeople, std::string name, int rg) {
 
     People* newPeople = new People;
     newPeople->name = name;
@@ -73,7 +87,21 @@ void toEndOfLinkedList(People *&linkedListPeople, std::string name, int rg) {
     }
 }
 
-void toNOfLinkedList(People *&linkedListPeople, std::string name, int rg, int position) {
+void removeToEndOfLinkedList(People *&linkedListPeople) {
+
+    People* newLinkedList = linkedListPeople;
+    People* auxLinkedList = new People;
+
+    while (newLinkedList->nextPeople != NULL) {
+        auxLinkedList = newLinkedList;
+        newLinkedList = newLinkedList->nextPeople;
+    }
+
+    auxLinkedList->nextPeople == NULL;
+
+}
+
+void addToNOfLinkedList(People *&linkedListPeople, std::string name, int rg, int position) {
     
     People* newPeople = new People;
     newPeople->name = name;
@@ -148,7 +176,7 @@ int main() {
                 std::cout << "Type a RG: ";
                 std::cin >> rg;
 
-                toBeginOfLinkedList(linkedListPeople, name, rg);
+                addToBeginOfLinkedList(linkedListPeople, name, rg);
                 break;
             
             case 2:
@@ -160,9 +188,9 @@ int main() {
                 std::cin >> rg;
 
                 if (returnSize(linkedListPeople) == 0) {
-                    toBeginOfLinkedList(linkedListPeople, name, rg);
+                    addToBeginOfLinkedList(linkedListPeople, name, rg);
                 } else {
-                    toEndOfLinkedList(linkedListPeople, name, rg);
+                    addToEndOfLinkedList(linkedListPeople, name, rg);
                 }
                 break;
 
@@ -177,12 +205,20 @@ int main() {
                 std::cin >> position;
 
                 if (position - 1 == 0) {
-                    toBeginOfLinkedList(linkedListPeople, name, rg);
+                    addToBeginOfLinkedList(linkedListPeople, name, rg);
                 } else if (position - 1 == returnSize(linkedListPeople) - 1) {
-                    toEndOfLinkedList(linkedListPeople, name, rg);
+                    addToEndOfLinkedList(linkedListPeople, name, rg);
                 } else {
-                    toNOfLinkedList(linkedListPeople, name, rg, position - 1);
+                    addToNOfLinkedList(linkedListPeople, name, rg, position - 1);
                 }
+                break;
+
+            case 4:
+                removeToBeginOfLinkedList(linkedListPeople);
+                break;
+
+            case 5:
+                removeToEndOfLinkedList(linkedListPeople);
                 break;
         }
     }
